@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2407542540789986384}
   m_Layer: 0
   m_Name: Platforms
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7757305235951299557}
-  - {fileID: 8805162018216397396}
+  - {fileID: 3578070669696487526}
   - {fileID: 5973719086644153325}
   - {fileID: 8554115070910090461}
   - {fileID: 6809652957150891368}
@@ -38,7 +38,7 @@ Transform:
   - {fileID: 5941626178976755667}
   - {fileID: 6207897667316238551}
   - {fileID: 4909971111622505870}
-  - {fileID: 817533150345113308}
+  - {fileID: 8248085573267934247}
   - {fileID: 3041286455795878086}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -595,7 +595,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b72ccf56f7f46d42988815b9d324d8e, type: 3}
---- !u!4 &817533150345113308 stripped
+--- !u!4 &8248085573267934247 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1285519019877481422, guid: 4b72ccf56f7f46d42988815b9d324d8e, type: 3}
   m_PrefabInstance: {fileID: 7178740676080105449}
@@ -719,7 +719,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 190678ac330588440a752b1eb9259646, type: 3}
---- !u!4 &8805162018216397396 stripped
+--- !u!4 &3578070669696487526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5708767915603919149, guid: 190678ac330588440a752b1eb9259646, type: 3}
   m_PrefabInstance: {fileID: 9123803001117004107}

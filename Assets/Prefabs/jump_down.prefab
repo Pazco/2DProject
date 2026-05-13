@@ -150,8 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _energy: 0
   _maxEngery: 100
-  _energyFlyingRatio: 0.1
-  _energyRegenerationRatio: 0.1
+  _energyFlyingRatio: 0.22
+  _energyRegenerationRatio: 14.99
   _horizontalForce: 2.44
   _flyForce: 96.8
 --- !u!114 &7850733180029124097
@@ -288,9 +288,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDrag: 0.21
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.33
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
