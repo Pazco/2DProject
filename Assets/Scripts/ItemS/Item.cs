@@ -9,9 +9,13 @@ public class Item : MonoBehaviour, IRecolectable
 
 {
     [SerializeField] private GameObject _particles;
+    [SerializeField] protected Color _effectColor = Color.magenta;
+    [SerializeField] protected float _effectDuration = 1f;
 
-   
-   
+    void Start() => Destroy(gameObject, 8f);
+
+
+
     public enum ItemTypes
     {
         None,
@@ -20,7 +24,7 @@ public class Item : MonoBehaviour, IRecolectable
         PositiveWords
     }
 
-    [field: SerializeField]public ItemTypes Type { get; set; }
+    [field: SerializeField] public ItemTypes Type { get; set; }
 
     public void Recolected()
     {

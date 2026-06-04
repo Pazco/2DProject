@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particles: {fileID: 1714732115185409815, guid: 194a7af6e4dc43f45a1aa59a0becf473, type: 3}
+  _effectColor: {r: 0.5377358, g: 0.11414205, b: 0.5377358, a: 1}
+  _effectDuration: 1
   <Type>k__BackingField: 2
 --- !u!212 &7048926304162971621
 SpriteRenderer:
@@ -116,7 +118,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -157,7 +159,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.012831271, y: 0.021385789}

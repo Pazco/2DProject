@@ -60,7 +60,7 @@ public class Jetpack : MonoBehaviour
         }
 
         // 2. Animación Vertical (Volar y Caer)
-        if (Input.GetAxisRaw("Vertical") > 0) // Si va hacia arriba
+        if (Input.GetAxisRaw("Vertical") > 0 && Energy > 0) // Si va hacia arriba
         {
             _animator.SetBool("isFlying", true);
             _animator.SetBool("isMoving", false);
@@ -141,9 +141,9 @@ public class Jetpack : MonoBehaviour
         }
     }
 
-    public void AddEnergy(float NOSE_DAMAGE)
+    public void AddEnergy(float amount)
     {
-
+        Energy += amount;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
