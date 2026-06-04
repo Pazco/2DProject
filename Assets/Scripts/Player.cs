@@ -13,12 +13,12 @@ public class Player : MonoBehaviour
 
    private void Awake()
     {
-        _anim = GetComponent<Animator>();
+        //_anim = GetComponent<Animator>();
     }
 
  
     void Update()
     {
-            _anim.SetBool("Flying",  _jetpack.Flying);
+            //_anim.SetBool("Flying",  _jetpack.Flying);
     }
 }

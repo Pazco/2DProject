@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 1605043464403175552}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.43477, z: 0}
+  m_LocalScale: {x: 0.7625, y: 0.35, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 26092160245917744}
@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 686359559836074718}
   - component: {fileID: 5569517619080426702}
   - component: {fileID: 3124406042476091940}
+  - component: {fileID: 3466732330088301204}
   m_Layer: 0
   m_Name: jump_down
   m_TagString: Player
@@ -149,11 +150,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _energy: 0
-  _maxEngery: 100
-  _energyFlyingRatio: 0.22
-  _energyRegenerationRatio: 14.99
-  _horizontalForce: 2.44
-  _flyForce: 96.8
+  _maxEnergy: 100
+  _energyFlyingRatio: 0.4
+  _energyRegenerationRatio: 30.2
+  _horizontalForce: 2.99
+  _flyForce: 20
 --- !u!114 &7850733180029124097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d21b803a34a52d44aa5022c64ba0442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
   _jetpack: {fileID: 8451633182000671052}
 --- !u!212 &3656891124209736018
 SpriteRenderer:
@@ -207,13 +209,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fcd1d398e73d48f9b4538e3b1079980d, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 699837923, guid: edc28ee7e16943e4f82adcee4bc7273b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.6, y: 3}
+  m_Size: {x: 1.4, y: 1.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -229,7 +231,7 @@ Animator:
   m_GameObject: {fileID: 8428308512756696255}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f3107b15f02d49599f7581d88b97df53, type: 2}
+  m_Controller: {fileID: 9100000, guid: b76f360e4c203d443a2efc621cbdedba, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -272,8 +274,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.019987524, y: -0.28981972}
-  m_Size: {x: 1.1215416, y: 1.7011809}
+  m_Offset: {x: -0.019987524, y: 0.6970417}
+  m_Size: {x: 1.1215416, y: 1.5583144}
   m_Direction: 0
 --- !u!50 &3124406042476091940
 Rigidbody2D:
@@ -287,10 +289,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 1.07
   m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 1.33
+  m_GravityScale: 1.21
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -302,3 +304,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &3466732330088301204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8428308512756696255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 00000000
+  m_ShapePath:
+  - {x: -0.4304251, y: -0.014739513, z: 0}
+  - {x: -0.4218148, y: 0.38923883, z: 0}
+  - {x: -0.6072937, y: 0.38325572, z: 0}
+  - {x: -0.5953274, y: 0.8080623, z: 0}
+  - {x: -0.42779797, y: 0.8140452, z: 0}
+  - {x: -0.40842265, y: 1.4250342, z: 0}
+  - {x: 0.42637274, y: 1.4258446, z: 0}
+  - {x: 0.41583186, y: 1.0114894, z: 0}
+  - {x: 0.60131073, y: 1.0114908, z: 0}
+  - {x: 0.60729396, y: 0.39522195, z: 0}
+  - {x: 0.4038655, y: 0.38923883, z: 0}
+  - {x: 0.41247603, y: -0.0019626617, z: 0}
+  m_ShapePathHash: -1595642108
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -2202
+  m_LocalBounds:
+    m_Center: {x: 0.00000011920929, y: 0.7055525, z: 0}
+    m_Extent: {x: 0.60729384, y: 0.72029203, z: 0}

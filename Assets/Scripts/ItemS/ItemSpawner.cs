@@ -19,7 +19,7 @@ public class ItemSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _cronoTime += Time.deltaTime;
+        _cronoTime += (float)(Time.deltaTime * 0.5);
         if (_cronoTime > _nextSpawnTime)
         {
             SpawnTime();

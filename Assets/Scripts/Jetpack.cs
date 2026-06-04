@@ -13,45 +13,81 @@ public class Jetpack : MonoBehaviour
 
     public float Energy
     {
-        get
-        {
-            return _energy;
-        }
-        set
-        {
-            _energy = Mathf.Clamp(value, 0, _maxEngery);
-        }
+        get { return _energy; }
+        set { _energy = Mathf.Clamp(value, 0, _maxEnergy); }
     }
 
     public bool Flying { get; set; }
 
-
-
-
     private Rigidbody2D _targetRB;
+
+    // --- VARIABLES DE ANIMACIÓN (NUEVAS) ---
+    private Animator _animator;
+    private SpriteRenderer _spriteRenderer;
+
     [SerializeField] private float _energy;
-    [SerializeField] private float _maxEngery;
+    [SerializeField] public float _maxEnergy;
     [SerializeField] private float _energyFlyingRatio;
     [SerializeField] private float _energyRegenerationRatio;
     [SerializeField] private float _horizontalForce;
     [SerializeField] private float _flyForce;
     private bool _flying = false;
-    private bool _onPlatform = false;
+    private int _platformCount = 0;
 
 
     public void Awake()
     {
         _targetRB = GetComponent<Rigidbody2D>();
+
+        // --- BUSCAMOS LOS COMPONENTES VISUALES (NUEVO) ---
+        _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    void Update()
+    {
+        if (Mathf.Abs(_targetRB.velocity.x) > 0.1f)
+        {
+            _animator.SetBool("isMoving", true);
+            if (_targetRB.velocity.x > 0.1f)
+                _spriteRenderer.flipX = false;
+            else if (_targetRB.velocity.x < -0.1f)
+                _spriteRenderer.flipX = true;
+        }
+        else
+        {
+            _animator.SetBool("isMoving", false);
+        }
+
+        // 2. Animación Vertical (Volar y Caer)
+        if (Input.GetAxisRaw("Vertical") > 0) // Si va hacia arriba
+        {
+            _animator.SetBool("isFlying", true);
+            _animator.SetBool("isMoving", false);
+            _animator.SetBool("isFalling", false);
+        }
+        else if (_targetRB.velocity.y < -0.1f) // Si va hacia abajo
+        {
+            _animator.SetBool("isFlying", false);
+            _animator.SetBool("isFalling", true);
+        }
+        else // Si está quieto en el eje Y (en el suelo)
+        {
+            _animator.SetBool("isFlying", false);
+            _animator.SetBool("isFalling", false);
+        }
     }
 
     public void FlyUp()
     {
         _flying = true;
     }
+
     public void StopFlying()
     {
         _flying = false;
     }
+
     public void Regenerate()
     {
         Energy += _energyRegenerationRatio * Time.fixedDeltaTime;
@@ -64,9 +100,6 @@ public class Jetpack : MonoBehaviour
 
     public void FlyHorizontal(Direction flyDirection)
     {
-        if (!_flying)
-            return;
-
         if (flyDirection == Direction.Left)
         {
             _targetRB.AddForce(Vector2.left * _horizontalForce);
@@ -77,10 +110,9 @@ public class Jetpack : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        Energy = _maxEngery;
+        Energy = _maxEnergy;
 
     }
 
@@ -90,8 +122,7 @@ public class Jetpack : MonoBehaviour
         {
             DoFly();
         }
-        // 2. Solo regeneramos si estamos sobre la plataforma y NO estamos volando
-        else if (_onPlatform)
+        else if (_platformCount > 0)
         {
             Regenerate();
         }
@@ -110,19 +141,16 @@ public class Jetpack : MonoBehaviour
         }
     }
 
-    
     public void AddEnergy(float NOSE_DAMAGE)
     {
-
 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Importante: Asegúrate de que el suelo/plataformas de tu juego tengan el Tag "Ground"
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Platform"))
         {
-            _onPlatform = true;
+            _platformCount++;
         }
     }
 
@@ -130,8 +158,7 @@ public class Jetpack : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Platform"))
         {
-            _onPlatform = false;
+            _platformCount--;
         }
     }
-
 }
