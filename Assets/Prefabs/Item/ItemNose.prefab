@@ -99,6 +99,8 @@ MonoBehaviour:
   _particles: {fileID: 1714732115185409815, guid: b416eb0b4d6da694a954b34361eab6a8, type: 3}
   _effectColor: {r: 0.15307939, g: 0.56009775, b: 0.754717, a: 1}
   _effectDuration: 1
+  _clip: {fileID: 8300000, guid: 4ccc5cee2fb6c714da8b25e5becea7b8, type: 3}
+  _volume: 0.1
   <Type>k__BackingField: 1
 --- !u!70 &6769791628245382663
 CapsuleCollider2D:

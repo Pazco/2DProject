@@ -50,6 +50,8 @@ MonoBehaviour:
   _particles: {fileID: 1714732115185409815, guid: 194a7af6e4dc43f45a1aa59a0becf473, type: 3}
   _effectColor: {r: 0.5377358, g: 0.11414205, b: 0.5377358, a: 1}
   _effectDuration: 1
+  _clip: {fileID: 8300000, guid: a7d3e7c5c671cec4cad7b22213f611ac, type: 3}
+  _volume: 0.1
   <Type>k__BackingField: 2
 --- !u!212 &7048926304162971621
 SpriteRenderer:

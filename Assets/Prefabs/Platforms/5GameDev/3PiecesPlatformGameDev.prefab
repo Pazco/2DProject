@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5708767915603919149}
   - component: {fileID: -974812298979054858}
+  - component: {fileID: 6318520720608063562}
   m_Layer: 0
   m_Name: 3PiecesPlatformGameDev
   m_TagString: Untagged
@@ -235,3 +236,30 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5962953898049189260, guid: db95f1ada9d78ee4caf2a419f7402611, type: 3}
   m_PrefabInstance: {fileID: 8574458489142720339}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &6318520720608063562
+Rigidbody2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3508899431300627929}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+

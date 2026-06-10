@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ItemError : Item
 {
-    const float ERROR_DOWN_POS = 2.5f;
+    const float ERROR_DOWN_POS = 1.5f;
     const float ERROR_DAMAGE = -50;
     private void OnTriggerEnter2D(Collider2D collision)
     {

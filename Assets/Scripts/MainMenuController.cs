@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class NewBehaviourScript : MonoBehaviour
+public class MainMenuController : MonoBehaviour
 {
     [SerializeField] Button _startGameButton;
     [SerializeField] Button _exitGameButton;
@@ -22,8 +22,13 @@ public class NewBehaviourScript : MonoBehaviour
     }
 
     private void StartGame()
-
     {
+        if (GameManager.Instance == null)
+        {
+            GameObject gm = new GameObject("GameManager");
+            gm.AddComponent<GameManager>();
+        }
+        GameManager.Instance.StartTimer();
         SceneManager.LoadScene("InGame");
     }
 }

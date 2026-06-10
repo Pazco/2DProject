@@ -14,10 +14,25 @@ public class Jetpack : MonoBehaviour
     public float Energy
     {
         get { return _energy; }
-        set { _energy = Mathf.Clamp(value, 0, _maxEnergy); }
+        set
+        {
+            _energy = Mathf.Clamp(value, 0, _maxEnergy);
+
+            if (_energy >= _maxEnergy && !_energyFullEffectPlayed)
+            {
+                if (_particulasRecarga != null)
+                    Instantiate(_particulasRecarga, transform.position, Quaternion.identity);
+                _energyFullEffectPlayed = true;
+            }
+            else if (_energy < _maxEnergy)
+            {
+                _energyFullEffectPlayed = false;
+            }
+        }
     }
 
     public bool Flying { get; set; }
+    public bool IsMoving { get; set; }
 
     private Rigidbody2D _targetRB;
 
@@ -31,8 +46,11 @@ public class Jetpack : MonoBehaviour
     [SerializeField] private float _energyRegenerationRatio;
     [SerializeField] private float _horizontalForce;
     [SerializeField] private float _flyForce;
+    [SerializeField] private AudioClip _flyClip;
+    [SerializeField] private GameObject _particulasRecarga;
     private bool _flying = false;
-    private int _platformCount = 0;
+    private bool _energyFullEffectPlayed = false;
+    private AudioSource _audioSource;
 
 
     public void Awake()
@@ -42,17 +60,20 @@ public class Jetpack : MonoBehaviour
         // --- BUSCAMOS LOS COMPONENTES VISUALES (NUEVO) ---
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.playOnAwake = false;
     }
 
     void Update()
     {
+        if (_targetRB.velocity.x < -0.1f)
+            _spriteRenderer.flipX = true;
+        else if (_targetRB.velocity.x > 0.1f)
+            _spriteRenderer.flipX = false;
+
         if (Mathf.Abs(_targetRB.velocity.x) > 0.1f)
         {
             _animator.SetBool("isMoving", true);
-            if (_targetRB.velocity.x > 0.1f)
-                _spriteRenderer.flipX = false;
-            else if (_targetRB.velocity.x < -0.1f)
-                _spriteRenderer.flipX = true;
         }
         else
         {
@@ -60,7 +81,7 @@ public class Jetpack : MonoBehaviour
         }
 
         // 2. Animación Vertical (Volar y Caer)
-        if (Input.GetAxisRaw("Vertical") > 0 && Energy > 0) // Si va hacia arriba
+        if (_flying) // Solo si el jetpack tiene energía y está impulsando
         {
             _animator.SetBool("isFlying", true);
             _animator.SetBool("isMoving", false);
@@ -80,12 +101,22 @@ public class Jetpack : MonoBehaviour
 
     public void FlyUp()
     {
+        if (Energy <= 0) return;
+
+        if (!_flying && _flyClip != null && _audioSource != null)
+        {
+            _audioSource.clip = _flyClip;
+            _audioSource.loop = true;
+            _audioSource.Play();
+        }
         _flying = true;
     }
 
     public void StopFlying()
     {
         _flying = false;
+        if (_audioSource != null)
+            _audioSource.Stop();
     }
 
     public void Regenerate()
@@ -122,7 +153,7 @@ public class Jetpack : MonoBehaviour
         {
             DoFly();
         }
-        else if (_platformCount > 0)
+        else if (IsGrounded() && !IsMoving)
         {
             Regenerate();
         }
@@ -138,6 +169,8 @@ public class Jetpack : MonoBehaviour
         else
         {
             _flying = false;
+            if (_audioSource != null)
+                _audioSource.Stop();
         }
     }
 
@@ -146,19 +179,19 @@ public class Jetpack : MonoBehaviour
         Energy += amount;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private bool IsGrounded()
     {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Platform"))
-        {
-            _platformCount++;
-        }
-    }
+        Bounds bounds = GetComponent<Collider2D>().bounds;
+        float rayLength = 0.15f;
+        float[] xOffsets = { -0.2f, 0f, 0.2f };
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Ground") || collision.gameObject.CompareTag("Platform"))
+        foreach (float xOffset in xOffsets)
         {
-            _platformCount--;
+            Vector2 startPos = new Vector2(bounds.center.x + xOffset, bounds.min.y);
+            RaycastHit2D hit = Physics2D.Raycast(startPos, Vector2.down, rayLength, LayerMask.GetMask("Default"));
+            if (hit.collider != null && (hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Platform")))
+                return true;
         }
+        return false;
     }
 }

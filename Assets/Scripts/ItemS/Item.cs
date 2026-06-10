@@ -6,15 +6,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Item : MonoBehaviour, IRecolectable
-
 {
     [SerializeField] private GameObject _particles;
     [SerializeField] protected Color _effectColor = Color.magenta;
     [SerializeField] protected float _effectDuration = 1f;
+    [SerializeField] private AudioClip _clip;
+    [SerializeField, Range(0f, 1f)] private float _volume = 1f;
 
     void Start() => Destroy(gameObject, 8f);
-
-
 
     public enum ItemTypes
     {
@@ -28,7 +27,11 @@ public class Item : MonoBehaviour, IRecolectable
 
     public void Recolected()
     {
-        Destroy(gameObject);
+        AudioSource audio = GetComponent<AudioSource>();
+        if (audio != null && _clip != null)
+            audio.PlayOneShot(_clip, _volume);
+
+        Destroy(gameObject, 0.15f);
         CreateParticles();
     }
 

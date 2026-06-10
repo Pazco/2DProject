@@ -1,25 +1,25 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlatformMover : MonoBehaviour
 {
     [Header("Ajustes de Movimiento")]
-    public float velocidad = 2f;    // Qué tan rápido se mueve
-    public float distancia = 1.5f;  // Cuánto se aleja del centro
+    public float velocidad = 2f;
+    public float distancia = 1.5f;
 
-    private Vector3 posicionInicial;
+    private Vector3 _posicionInicial;
+    private Rigidbody2D _rb;
 
     void Start()
     {
-        // Guardamos su posición original para que oscile alrededor de ese punto
-        posicionInicial = transform.position;
+        _posicionInicial = transform.position;
+        _rb = GetComponent<Rigidbody2D>();
+        _rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        // Calculamos la nueva posición X usando una onda senoidal
-        float nuevaX = posicionInicial.x + Mathf.Sin(Time.time * velocidad) * distancia;
-
-        // Aplicamos la nueva posición, manteniendo su Y y Z intactas
-        transform.position = new Vector3(nuevaX, transform.position.y, transform.position.z);
+        float nuevaX = _posicionInicial.x + Mathf.Sin(Time.time * velocidad) * distancia;
+        _rb.MovePosition(new Vector2(nuevaX, _rb.position.y));
     }
 }

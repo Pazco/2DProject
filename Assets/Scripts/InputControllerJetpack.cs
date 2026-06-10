@@ -8,16 +8,20 @@ public class InputControllerJetpack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxis("Horizontal") < 0)
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        _jetpack.IsMoving = Mathf.Abs(horizontal) > 0;
+
+        if (horizontal < 0)
         {
             _jetpack.FlyHorizontal(Jetpack.Direction.Left);
         }
-        else if (Input.GetAxis("Horizontal") > 0)
+        else if (horizontal > 0)
         {
             _jetpack.FlyHorizontal(Jetpack.Direction.Right);
         }
 
-        if (Input.GetAxis("Vertical") > 0)
+        float vertical = Input.GetAxisRaw("Vertical");
+        if (vertical > 0)
             _jetpack.FlyUp();
         else
             _jetpack.StopFlying();
